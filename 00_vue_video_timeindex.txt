@@ -1,0 +1,12 @@
+Vue video time index
+00:05:40	Vue 3 setup
+00:12:17	Vue directives
+00:19:48	Events and Methods
+00:29:21	Components
+00:39:30	Component props
+00:57:30	Loops
+01:06:10	Lifecycle Hooks
+01:14:33	App Demo
+01:15:34	Upgrading Vanilla JS to Vue
+01:26:46	Adding Items to Cart
+01:43:23	Dynamic Content
