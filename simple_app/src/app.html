@@ -25,7 +25,7 @@
         </nav>
         <a @click="toggleSidebar" class="top-bar-cart-link">
           <i class="icofont-cart-alt icofont-1x"></i>
-          <span>Cart (0)</span>
+          <span>Cart ({{ totalQuantity }})</span>
         </a>
       </header>
 
@@ -105,10 +105,19 @@
             }
           }
         },
+        computed: {
+          totalQuantity() {
+            const total = Object.values(this.cart).reduce((acc, curr)=>{
+              return acc + curr;
+            }, 0);
+            return total;
+          }
+        },
         methods: {
           addToCart(name, index) {
             if (! this.cart[name]) this.cart[name] = 0;
             this.cart[name] += this.inventory[index].quantity;
+            this.inventory[index].quantity = 0;
           },
           toggleSidebar() {
             this.showSidebar = !this.showSidebar;
