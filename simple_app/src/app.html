@@ -87,7 +87,8 @@
         v-if="showSidebar"
         :toggle="toggleSidebar"
         :cart="cart"
-        :inventory="inventory"/>
+        :inventory="inventory"
+        :remove="removeCartItem"/>
 
       <footer>
       </footer>
@@ -108,11 +109,13 @@
           addToCart(name, index) {
             if (! this.cart[name]) this.cart[name] = 0;
             this.cart[name] += this.inventory[index].quantity;
-            console.log(this.cart);
           },
           toggleSidebar() {
-            this.showSidebar = !this.showSidebar
-          }
+            this.showSidebar = !this.showSidebar;
+          },
+          removeCartItem(name) {
+              delete this.cart[name];
+            },
         },
         async mounted() {
           const res = await fetch('./food.json');
@@ -122,7 +125,7 @@
       });
 
       app.component('side-bar', {
-        props: ['toggle','cart','inventory'],
+        props: ['toggle','cart','inventory','remove'],
         methods: {
           getPrice(name) {
             const product = this.inventory.find((item)=>{
@@ -131,12 +134,11 @@
             return product.price.USD;
           },
           calculateTotal() {
-            const names = Object.keys(this.cart);
-            const total = Object.values(this.cart).reduce((acc, curr, index)=>{
-              return acc += curr * this.getPrice(name[index]);
-            });
+            const total = Object.entries(this.cart).reduce((acc, curr, index)=>{
+              return acc = curr[1] * this.getPrice(curr[0]);
+            },0);
             return total;
-          }
+          },
         },
         template: `
         <aside class="cart-container">
@@ -168,16 +170,16 @@
                     <td class="center">{{ quantity }}</td>
                     <td>\${{ getPrice(key) * quantity }} </td>
                     <td class="center">
-                      <button class="btn btn-light cart-remove">
+                      <button @click="remove(key)" class="btn btn-light cart-remove">
                         &times;
                       </button>
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <p class="center"><em>No items in cart</em></p>
+              <p v-if="!Object.keys(cart).length" class="center"><em>No items in cart</em></p>
               <div class="spread">
-                <span><strong>Total:</strong> \${{ cartTotal }}</span>
+                <span><strong>Total:</strong> \${{ calculateTotal() }}</span>
                 <button class="btn btn-light">Checkout</button>
               </div>
             </div>
