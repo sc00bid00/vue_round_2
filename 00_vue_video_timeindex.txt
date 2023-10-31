@@ -11,3 +11,4 @@ Vue video time index
 01:26:46	Adding Items to Cart
 01:43:23	Dynamic Content
 02:15:55	Reusable Components
+02:26:21	Vue CLI
