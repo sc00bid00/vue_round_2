@@ -18,3 +18,4 @@ Vue video time index
 03:00:28	Application Pages
 03:06:08	Sidebar
 03:20:48	Adding Items to Cart
+03:24:47	Finishing Up
