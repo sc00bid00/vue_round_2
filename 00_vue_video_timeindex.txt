@@ -14,4 +14,7 @@ Vue video time index
 02:26:21	Vue CLI
 02:32:49	Vue Folder Structure
 02:43:59	Top Nav
-
+02:48:46	Styling with Sass
+03:00:28	Application Pages
+03:06:08	Sidebar
+03:20:48	Adding Items to Cart
